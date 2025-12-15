@@ -1,0 +1,152 @@
+/* Variables de Tema (Base) */
+:root {
+  --background-light: #ffffff;
+  --text-light: #333333;
+  --primary-light: #007bff;
+  --secondary-light: #f0f0f0;
+  --border-light: #cccccc;
+
+  --background-dark: #1e1e1e;
+  --text-dark: #f0f0f0;
+  --primary-dark: #4da6ff;
+  --secondary-dark: #333333;
+  --border-dark: #555555;
+}
+
+/* Base Global */
+body {
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Modos (Aplicados por ThemeContext) */
+.light {
+  background-color: var(--background-light);
+  color: var(--text-light);
+}
+
+.dark {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+/* Tipografía y Elementos Comunes */
+h1, h2, h3 {
+  color: var(--primary-light);
+  margin-top: 0;
+}
+.dark h1, .dark h2, .dark h3 {
+  color: var(--primary-dark);
+}
+
+a {
+  color: var(--primary-light);
+  text-decoration: none;
+}
+.dark a {
+  color: var(--primary-dark);
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Layout */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--secondary-light);
+}
+.dark .header {
+  border-bottom: 1px solid var(--border-dark);
+  background-color: var(--secondary-dark);
+}
+
+.nav-link {
+  margin-right: 15px;
+  padding: 5px 10px;
+}
+
+.theme-toggle-btn {
+  padding: 8px 15px;
+  cursor: pointer;
+  background-color: var(--primary-light);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+.dark .theme-toggle-btn {
+  background-color: var(--primary-dark);
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 40px;
+  font-size: 0.9em;
+}
+.dark .footer {
+  border-top: 1px solid var(--border-dark);
+}
+
+/* Hoja de Vida (Home) */
+.experiencia-item {
+  border: 1px solid var(--border-light);
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+.dark .experiencia-item {
+  border: 1px solid var(--border-dark);
+}
+.periodo {
+  font-style: italic;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+/* Blog (PostList y PostDetail) */
+.post-summary {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-light);
+  border-radius: 5px;
+}
+.dark .post-summary {
+  border: 1px solid var(--border-dark);
+}
+
+.post-content p {
+  white-space: pre-wrap;
+}
+.post-meta {
+    font-size: 0.85em;
+    color: #888;
+}
+.dark .post-meta {
+    color: #aaa;
+}
+
+/* Responsive básico */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav {
+    margin-bottom: 10px;
+  }
+}

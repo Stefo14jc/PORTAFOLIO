@@ -1,0 +1,32 @@
+{
+  "experiencia": [
+    {
+      "id": 1,
+      "titulo": "Desarrollador Frontend Junior",
+      "empresa": "Tech Solutions",
+      "periodo": "2023 - Presente",
+      "descripcion": "Desarrollo y mantenimiento de interfaces de usuario con React y JavaScript."
+    },
+    {
+      "id": 2,
+      "titulo": "Pasante de Desarrollo Web",
+      "empresa": "Digital Hub",
+      "periodo": "2022 - 2023",
+      "descripcion": "Colaboración en proyectos con HTML, CSS y fundamentos de React."
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "Cómo construir una lista de tareas con React y JSON Server",
+      "date": "2025-12-14",
+      "content": "### Introducción al CRUD\nEste tutorial explica cómo implementar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando React para el frontend y JSON Server para simular un backend RESTful.\n\n### 1. Configuración de JSON Server\nPrimero, asegurate de tener un 'db.json' con un array, por ejemplo, 'tasks'.\n\n### 2. Uso de Axios para 'Leer' (GET)\nPara obtener la lista de tareas, se usa un custom hook y Axios.\n\n```javascript\n// custom hook: useFetchTasks.js\nimport { useState, useEffect } from 'react';\nimport axios from 'axios';\n\nconst useFetchTasks = () => {\n  const [tasks, setTasks] = useState([]);\n  // ... logica de useEffect con axios.get('http://localhost:3000/tasks')\n};\n\nexport default useFetchTasks;\n```\n\n### 3. Crear (POST), Actualizar (PUT) y Eliminar (DELETE)\nLas otras operaciones se manejan con llamadas POST, PUT o DELETE de Axios en funciones que se disparan con eventos de usuario, asegurando que después de cada modificacion se actualice el estado local o se haga un re-fetch de los datos.\n\n### 4. Enrutamiento (React Router)\nSe utiliza React Router para manejar distintas vistas, como la vista principal de la lista y una vista para editar una tarea específica."
+    },
+    {
+      "id": 2,
+      "title": "Análisis de la propuesta 'Temporal' en TC39",
+      "date": "2025-12-14",
+      "content": "### ¿Qué problema resuelve?\nJavaScript actualmente usa el objeto Date, que es notoriamente difícil de manejar, mutable y dependiente de la hora local del sistema.\n\n### ¿Cómo funciona?\nLa propuesta 'Temporal' introduce objetos modernos para manejar fechas y horas, como 'Temporal.ZonedDateTime', 'Temporal.Instant' y 'Temporal.Duration'. Estos objetos son inmutables y ofrecen una API mucho más clara y segura para cálculos de tiempo.\n\n### ¿Por qué es relevante?\nLa gestión de fechas es crítica en casi toda aplicación. Temporal promete estandarizar y simplificar esta tarea, reduciendo bugs y mejorando la portabilidad del código.\n\n### Opinión Crítica\nConsidero que es una de las propuestas más esperadas. La inmutabilidad por sí sola justifica su adopción. El único riesgo puede ser el tamaño y la complejidad de la API inicial, pero a largo plazo es indispensable."
+    }
+  ]
+}
