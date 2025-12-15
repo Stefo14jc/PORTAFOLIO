@@ -1,12 +1,9 @@
+// src/api/client.js
 import axios from 'axios';
 
-// Crea una instancia de Axios preconfigurada
-const apiClient = axios.create({
-  baseURL: 'http://localhost:3000', // URL base de JSON Server
-  timeout: 5000, 
-  headers: {
-    'Content-Type': 'application/json',
-  },
+// Instancia configurada para la URL de JSON Server
+const client = axios.create({
+  baseURL: 'http://localhost:3001', // <-- VERIFICAR PUERTO
 });
 
-export default apiClient;
+export default client;

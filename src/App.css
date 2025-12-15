@@ -1,42 +1,594 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* src/App.css */
+
+/* --- RESET & LAYOUT GENERAL --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-main-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-content-area {
+    padding: 20px;
+    flex-grow: 1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* --- ESTILOS DE NAVEGACIÓN (NAVBAR) --- */
+.main-nav {
+    display: flex;
+    background-color: #2c3e50; /* Color oscuro profesional */
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.card {
-  padding: 2em;
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    margin-right: 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 600;
 }
 
-.read-the-docs {
-  color: #888;
+.nav-link:hover {
+    background-color: #34495e;
+}
+
+/* --- HOJA DE VIDA (NUEVO ESTILO DE DOS COLUMNAS) --- */
+.app-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 950px;
+}
+
+.resume-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex; /* Habilita las columnas */
+    overflow: hidden;
+}
+
+.two-column-layout {
+    display: flex;
+    width: 100%;
+}
+
+/* ------------------------------------- */
+/* COLUMNA IZQUIERDA (SIDEBAR) */
+/* ------------------------------------- */
+.sidebar-column {
+    width: 35%; /* Ocupa un 35% */
+    background-color: #34495e; /* Fondo oscuro profesional */
+    color: white;
+    padding: 30px 25px;
+    box-sizing: border-box;
+}
+
+.profile-header-sidebar {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.photo-container-sidebar {
+    position: relative;
+    margin: 0 auto 15px;
+    width: 100px;
+    height: 100px;
+}
+
+.photo-circle-sidebar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #2c3e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 3px solid #007bff; /* Borde de color primario */
+}
+
+.photo-edit-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #f39c12;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.profile-name-sidebar {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.profile-title-sidebar {
+    font-size: 0.9em;
+    color: #bdc3c7;
+    margin: 5px 0 0;
+}
+
+.section-title-sidebar {
+    color: #007bff; /* Color de acento */
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-section:last-child {
+    border-bottom: none;
+}
+
+.contact-info-list p {
+    font-size: 0.9em;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.contact-icon {
+    color: #2ecc71; /* Íconos de contacto en verde */
+}
+
+/* Habilidades en Sidebar */
+.skill-item-sidebar {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.skill-name {
+    font-weight: 600;
+    font-size: 0.9em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.skill-bar-container-sidebar {
+    background-color: #7f8c8d;
+    height: 5px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-bar-sidebar {
+    height: 100%;
+    background-color: #2ecc71; /* Color verde para progreso */
+    transition: width 0.5s ease-in-out;
+}
+
+/* Referencias en Sidebar */
+.reference-item-sidebar {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    position: relative;
+}
+.ref-name {
+    font-size: 1em;
+    margin: 0;
+}
+.ref-position, .ref-phone {
+    font-size: 0.8em;
+    color: #bdc3c7;
+    margin: 3px 0;
+}
+
+
+/* ------------------------------------- */
+/* COLUMNA DERECHA (MAIN CONTENT) */
+/* ------------------------------------- */
+.main-content-column {
+    width: 65%; /* Ocupa el 65% */
+    background-color: white;
+    padding: 30px 40px;
+    box-sizing: border-box;
+}
+
+.section-title-main {
+    color: #2c3e50;
+    font-size: 1.6em;
+    font-weight: 700;
+    border-bottom: 3px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.main-section {
+    margin-bottom: 30px;
+}
+
+/* Items (Experience, Education, Projects) */
+.item {
+    padding-left: 15px;
+    border-left: 3px solid #007bff; /* Timeline de color primario */
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.item-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.item-company, .item-institution {
+    font-style: italic;
+    color: #7f8c8d;
+    margin: 3px 0;
+}
+
+.item-period {
+    background-color: #e9ecef;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.item-description {
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #555;
+    margin-top: 8px;
+}
+
+.summary-text {
+    line-height: 1.6;
+    font-size: 1em;
+    color: #555;
+}
+
+/* --- MODO EDICIÓN y BOTONES --- */
+.edit-control {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+    gap: 15px;
+}
+
+.btn-edit, .btn-download {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.btn-edit {
+    background-color: #f39c12;
+}
+
+.btn-save {
+    background-color: #2ecc71;
+}
+
+.btn-download {
+    background-color: #3498db;
+}
+
+/* Botones Agregar y Eliminar */
+.btn-add-main {
+    padding: 8px 15px;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+}
+
+.btn-add-sidebar {
+    background: transparent;
+    border: none;
+    color: #2ecc71;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.btn-delete-main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+    z-index: 10;
+}
+
+.btn-delete-skill, .btn-delete-ref {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+    z-index: 10;
+}
+
+
+/* Edición de inputs */
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.textarea-summary {
+    min-height: 80px;
+}
+/* Inputs de edición en sidebar */
+.input-name-sidebar, .input-title-sidebar, .input-contact, .input-ref-name, .input-ref-position, .input-ref-phone, .input-skill-name {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.input-name-sidebar, .input-title-sidebar {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+.skill-slider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.range-input {
+    flex-grow: 1;
+    height: 5px;
+}
+.skill-percent {
+    font-size: 0.8em;
+}
+
+
+/* --- ESTILOS DE POSTS Y DETALLE (MANTENIDOS) --- */
+.posts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.posts-title, .detail-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.post-card-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.post-card-title {
+    color: #007bff;
+    font-size: 1.4em;
+    margin-top: 0;
+}
+
+.post-card-meta, .detail-meta {
+    display: block;
+    margin-top: 10px;
+    color: #95a5a6;
+    font-size: 0.85em;
+    margin-bottom: 15px;
+}
+
+.post-card-body {
+    flex-grow: 1;
+    color: #555;
+    line-height: 1.6;
+}
+
+.post-card-button {
+    text-align: center;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.post-card-button:hover {
+    background-color: #0056b3;
+}
+
+/* Detalle del Post */
+.post-detail-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.btn-back {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.detail-content h3 {
+    color: #2c3e50;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+.detail-content code {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 5px solid #007bff;
+    display: block;
+    padding: 10px;
+    margin: 15px 0;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.detail-content p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+/* --- ESTADOS DE CARGA Y ERROR --- */
+.loading-state, .error-state, .no-data-state {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2em;
+    color: #e74c3c;
+    border: 1px dashed #f1c40f;
+    margin-top: 50px;
+    background-color: #fcfcfc;
+}
+
+.loading-state {
+    color: #3498db;
+    border-color: #3498db;
+}
+
+/* --- MEDIA QUERIES y PRINT --- */
+@media (max-width: 768px) {
+    /* La Hoja de Vida se apila en móvil */
+    .two-column-layout {
+        flex-direction: column;
+    }
+
+    .sidebar-column, .main-content-column {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .sidebar-column {
+        border-bottom: 5px solid #007bff;
+    }
+
+    /* Ajustes generales */
+    .skills-grid, .references-grid, .posts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    .resume-card, .post-detail-container {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+    }
+    /* Asegurar que los colores del sidebar se mantengan en impresión */
+    .sidebar-column {
+        background-color: #34495e !important;
+        color: white !important;
+    }
+    .section-title-main {
+        color: #000 !important;
+        border-bottom-color: #000 !important;
+    }
+    .section-title-sidebar {
+        color: #2ecc71 !important; /* Asegurar acento en sidebar */
+    }
+    .contact-icon {
+        color: #2ecc71 !important;
+      
+    }
+    .skill-bar-sidebar {
+        background-color: #2ecc71 !important;
+        
+    }
+    body {
+        margin: 0;
+        padding: 0;
+    }
 }

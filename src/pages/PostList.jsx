@@ -1,30 +1,43 @@
-import React from 'react';
-import useFetchData from '../hooks/useFetchData.js'; // <-- Con .js
+// src/pages/PostList.jsx
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import client from '../api/client'; // Usamos Axios
+import '../App.css'; 
 
-const PostList = () => {
-  const { data: posts, loading, error } = useFetchData('/posts');
+export default function PostList() {
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  if (loading) return <p>Cargando posts del Blog...</p>;
-  if (error) return <p style={{color: 'red'}}>Error al cargar posts: {error}</p>;
-  if (!posts || posts.length === 0) return <p>No hay posts disponibles.</p>;
+    useEffect(() => {
+        client.get('/posts')
+            .then(response => {
+                setPosts(response.data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Error al cargar posts:", err);
+                setError("No se pudieron cargar los posts. ¿Está corriendo json-server?");
+                setLoading(false);
+            });
+    }, []);
 
-  return (
-    <main className="content">
-      <h1>📰 Blog Técnico</h1>
-      <div className="post-list">
-        {posts.map((post) => (
-          <article key={post.id} className="post-summary">
-            <h2>
-              <Link to={`/posts/${post.id}`}>{post.title}</Link>
-            </h2>
-            <p className="post-meta">Publicado el: {post.date}</p>
-            <p>{post.content.substring(0, 150)}...</p>
-          </article>
-        ))}
-      </div>
-    </main>
-  );
-};
+    if (loading) return <div className="loading-state">Cargando Posts...</div>;
+    if (error) return <div className="error-state posts-container">{error}</div>;
 
-export default PostList;
+    return (
+        <div className="posts-container">
+            <h1 className="posts-title">📝 Blog Técnico</h1>
+            <div className="posts-grid">
+                {posts.map(post => (
+                    <div key={post.id} className="post-card-item">
+                        <h2 className="post-card-title">{post.title}</h2>
+                        <small className="post-card-meta">Publicado: {post.date} | Autor: {post.author}</small>
+                        <p className="post-card-body">{post.content.substring(0, 120)}...</p>
+                        <Link to={`/posts/${post.id}`} className="post-card-button">Leer Artículo Completo</Link>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}

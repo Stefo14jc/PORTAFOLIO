@@ -1,16 +1,14 @@
+// src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
-import './index.css'; 
-import { ThemeProvider } from './context/ThemeContext.jsx'; // <-- Con .jsx
-import { BrowserRouter as Router } from 'react-router-dom'; // <-- BrowserRouter AQUÍ
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <Router> {/* Router DEBE estar aquí, fuera de App */}
-        <App />
-      </Router>
-    </ThemeProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
 );

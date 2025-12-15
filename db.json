@@ -1,32 +1,41 @@
 {
-  "experiencia": [
-    {
-      "id": 1,
-      "titulo": "Desarrollador Frontend Junior",
-      "empresa": "Tech Solutions",
-      "periodo": "2023 - Presente",
-      "descripcion": "Desarrollo y mantenimiento de interfaces de usuario con React y JavaScript."
-    },
-    {
-      "id": 2,
-      "titulo": "Pasante de Desarrollo Web",
-      "empresa": "Digital Hub",
-      "periodo": "2022 - 2023",
-      "descripcion": "Colaboración en proyectos con HTML, CSS y fundamentos de React."
-    }
-  ],
   "posts": [
     {
       "id": 1,
       "title": "Cómo construir una lista de tareas con React y JSON Server",
-      "date": "2025-12-14",
-      "content": "### Introducción al CRUD\nEste tutorial explica cómo implementar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando React para el frontend y JSON Server para simular un backend RESTful.\n\n### 1. Configuración de JSON Server\nPrimero, asegurate de tener un 'db.json' con un array, por ejemplo, 'tasks'.\n\n### 2. Uso de Axios para 'Leer' (GET)\nPara obtener la lista de tareas, se usa un custom hook y Axios.\n\n```javascript\n// custom hook: useFetchTasks.js\nimport { useState, useEffect } from 'react';\nimport axios from 'axios';\n\nconst useFetchTasks = () => {\n  const [tasks, setTasks] = useState([]);\n  // ... logica de useEffect con axios.get('http://localhost:3000/tasks')\n};\n\nexport default useFetchTasks;\n```\n\n### 3. Crear (POST), Actualizar (PUT) y Eliminar (DELETE)\nLas otras operaciones se manejan con llamadas POST, PUT o DELETE de Axios en funciones que se disparan con eventos de usuario, asegurando que después de cada modificacion se actualice el estado local o se haga un re-fetch de los datos.\n\n### 4. Enrutamiento (React Router)\nSe utiliza React Router para manejar distintas vistas, como la vista principal de la lista y una vista para editar una tarea específica."
+      "date": "2025-04-10",
+      "author": "Stéfano E. Castro",
+      "content": "### 🚀 Introducción al CRUD con React y JSON Server\n\nEste tutorial te guiará paso a paso para crear una aplicación básica de lista de tareas que implemente las cuatro operaciones fundamentales (CRUD): Crear, Leer, Actualizar y Eliminar. Usaremos **React** en el frontend, **JSON Server** para simular el backend RESTful, y la librería **Axios** para gestionar las peticiones HTTP.\n\n#### Paso 1: Configuración del Proyecto y Axios\n\nPrimero, aseguramos que Axios esté instalado. Luego, creamos una instancia base para simplificar futuras llamadas (como pide el deber):\n\n```javascript\n// src/api/client.js\nimport axios from 'axios';\n\nconst client = axios.create({\n  baseURL: 'http://localhost:3000',\n});\n\nexport default client;\n```\n\n#### Paso 2: Usando un Custom Hook (`useFetchData.js`)\n\nEn lugar de repetir la lógica `useState` y `useEffect` en cada componente, creamos un *custom hook* que gestiona la carga de datos (la 'R' de CRUD), usando **Axios**:\n\n```javascript\n// src/hooks/useFetchData.js\nimport { useState, useEffect } from 'react';\nimport client from '../api/client';\n\nexport const useFetchData = (endpoint) => {\n  const [data, setData] = useState(null);\n  const [loading, setLoading] = useState(true);\n  \n  useEffect(() => {\n    client.get(endpoint)\n      .then(response => {\n        setData(response.data);\n        setLoading(false);\n      })\n      .catch(error => console.error('Error fetching:', error));\n  }, [endpoint]);\n  \n  return { data, loading };\n};\n```\n\n#### Paso 3: Implementando las Operaciones CRUD con Axios\n\n* **Leer (GET):** Ya cubierto por `useFetchData` (usado en `PostList.jsx` y `Home.jsx` si carga experiencia).\n* **Crear (POST):** Usamos `client.post('/posts', { title: 'Nueva tarea' })`.\n* **Eliminar (DELETE):** Usamos `client.delete(`/posts/${id}`)`.\n* **Actualizar (PUT/PATCH):** Usamos `client.patch(`/posts/${id}`, { completed: true })`.\n\n#### Paso 4: Integración con React Router\n\nEl hook `useFetchData` y el `client.js` se importan en los componentes de la aplicación. Por ejemplo, en el componente `TodoApp.jsx` se usaría el hook, y las funciones de Crear/Eliminar se dispararían por los botones del usuario. React Router se usa para navegar entre el listado (`/posts`) y el detalle (`/posts/:id`).\n\nEsta arquitectura asegura un código limpio, modular y cumple con los requisitos de la API RESTful local."
     },
     {
       "id": 2,
       "title": "Análisis de la propuesta 'Temporal' en TC39",
-      "date": "2025-12-14",
-      "content": "### ¿Qué problema resuelve?\nJavaScript actualmente usa el objeto Date, que es notoriamente difícil de manejar, mutable y dependiente de la hora local del sistema.\n\n### ¿Cómo funciona?\nLa propuesta 'Temporal' introduce objetos modernos para manejar fechas y horas, como 'Temporal.ZonedDateTime', 'Temporal.Instant' y 'Temporal.Duration'. Estos objetos son inmutables y ofrecen una API mucho más clara y segura para cálculos de tiempo.\n\n### ¿Por qué es relevante?\nLa gestión de fechas es crítica en casi toda aplicación. Temporal promete estandarizar y simplificar esta tarea, reduciendo bugs y mejorando la portabilidad del código.\n\n### Opinión Crítica\nConsidero que es una de las propuestas más esperadas. La inmutabilidad por sí sola justifica su adopción. El único riesgo puede ser el tamaño y la complejidad de la API inicial, pero a largo plazo es indispensable."
+      "date": "2025-04-12",
+      "author": "Stéfano E. Castro",
+      "content": "### 🕰️ La Necesidad de un API de Temporalidad Nativo\n\nHe escogido la propuesta **Temporal** de TC39, actualmente en Stage 3, que busca reemplazar los objetos `Date` nativos de JavaScript con un API moderno y robusto para manejar fechas y horas.\n\n#### ¿Qué problema resuelve?\n\nEl objeto `Date` actual en JavaScript es notoriamente deficiente. Solo soporta el UTC y la zona horaria local del sistema, es mutable (lo que lleva a errores), y no maneja correctamente escenarios complejos como husos horarios, calendarios no gregorianos o duraciones. La comunidad ha dependido de librerías grandes como Moment.js o Day.js. Temporal busca estandarizar estas funcionalidades de forma nativa.\n\n#### ¿Cómo funciona?\n\nTemporal introduce un conjunto de clases inmutables (no mutables, lo que es clave para la seguridad) que representan diferentes conceptos de tiempo:\n\n* **`Temporal.Instant`**: Un punto exacto en la línea de tiempo (como un timestamp).\n* **`Temporal.ZonedDateTime`**: Una fecha/hora con un huso horario específico.\n* **`Temporal.PlainDate`**: Solo fecha, sin tiempo ni huso horario.\n* **`Temporal.Duration`**: Representa una cantidad de tiempo (ej., 5 horas y 30 minutos).\n\nEsto permite cálculos de tiempo mucho más seguros y expresivos, como sumar o restar duraciones sin preocuparse por saltos de horario de verano.\n\n#### ¿Por qué es relevante para el futuro de JavaScript?\n\nEsta propuesta es crucial. Al moverse a Stage 3, está muy cerca de ser implementada en todos los navegadores y entornos de ejecución. Al fin, JavaScript tendrá una herramienta nativa para el manejo de tiempo que se compara favorablemente con otros lenguajes (como Java o Python), lo que reducirá la dependencia de librerías de terceros y el tamaño de los paquetes.\n\n#### Opinión Crítica\n\nMe parece una propuesta **extremadamente útil**. La inmutabilidad de los objetos de tiempo es la característica más importante, eliminando una fuente común de *bugs* en aplicaciones complejas. El riesgo principal es la curva de aprendizaje inicial, ya que la API es grande. Sin embargo, dada la complejidad del tiempo, este es un compromiso necesario para la robustez del lenguaje."
     }
-  ]
+  ],
+  "experiencia": [
+    {
+      "id": 1,
+      "position": "Desarrollador de Contenido Digital",
+      "company": "ExP, Quito-Ecuador",
+      "period": "Febrero 2024 - Presente",
+      "description": "Diseño de contenido gráfico para generar impactos en posibles clientes del sector inmobiliario. Publicación de multimedia para redes sociales y plataformas digitales."
+    },
+    {
+      "id": 2,
+      "position": "Servicio Comunitario",
+      "company": "PUCE (Registros PUCA)",
+      "period": "2024",
+      "description": "Participación en proyecto de servicio comunitario universitario."
+    }
+  ],
+  "profile": {
+    "name": "Stéfano Espinosa Castro",
+    "title": "Desarrollador en Software",
+    "email": "stefojc14sc06@hotmail.com",
+    "phone": "+593 99 835 8412",
+    "location": "Quito, Ecuador"
+  }
 }
